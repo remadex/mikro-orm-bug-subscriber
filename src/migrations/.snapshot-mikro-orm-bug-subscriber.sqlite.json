@@ -1,0 +1,248 @@
+{
+  "namespaces": [],
+  "tables": [
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "text"
+        }
+      },
+      "name": "movies",
+      "indexes": [
+        {
+          "columnNames": [
+            "title"
+          ],
+          "composite": false,
+          "keyName": "movies_title_unique",
+          "constraint": true,
+          "primary": false,
+          "unique": true
+        },
+        {
+          "keyName": "primary",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {},
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "text"
+        },
+        "movie_id": {
+          "name": "movie_id",
+          "type": "integer",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        }
+      },
+      "name": "comments",
+      "indexes": [
+        {
+          "columnNames": [
+            "movie_id"
+          ],
+          "composite": false,
+          "keyName": "comments_movie_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "primary",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "comments_movie_id_foreign": {
+          "constraintName": "comments_movie_id_foreign",
+          "columnNames": [
+            "movie_id"
+          ],
+          "localTableName": "comments",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "movies",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "text"
+        }
+      },
+      "name": "tags",
+      "indexes": [
+        {
+          "keyName": "primary",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {},
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "comment_model_id": {
+          "name": "comment_model_id",
+          "type": "integer",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "tag_model_id": {
+          "name": "tag_model_id",
+          "type": "integer",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        }
+      },
+      "name": "comments_tags",
+      "indexes": [
+        {
+          "columnNames": [
+            "comment_model_id"
+          ],
+          "composite": false,
+          "keyName": "comments_tags_comment_model_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "tag_model_id"
+          ],
+          "composite": false,
+          "keyName": "comments_tags_tag_model_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "primary",
+          "columnNames": [
+            "comment_model_id",
+            "tag_model_id"
+          ],
+          "composite": true,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "comments_tags_comment_model_id_foreign": {
+          "constraintName": "comments_tags_comment_model_id_foreign",
+          "columnNames": [
+            "comment_model_id"
+          ],
+          "localTableName": "comments_tags",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "comments",
+          "deleteRule": "cascade",
+          "updateRule": "cascade"
+        },
+        "comments_tags_tag_model_id_foreign": {
+          "constraintName": "comments_tags_tag_model_id_foreign",
+          "columnNames": [
+            "tag_model_id"
+          ],
+          "localTableName": "comments_tags",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "tags",
+          "deleteRule": "cascade",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    }
+  ],
+  "nativeEnums": {}
+}
